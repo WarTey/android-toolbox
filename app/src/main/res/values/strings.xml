@@ -28,7 +28,17 @@
     <string name="fragment_two_foreground">Fragment Two Foreground</string>
     <string name="fragment_two_background">Fragment Two Background</string>
     <string name="fragment_two_destroyed">Fragment Two Destroyed</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Nom</string>
+    <string name="firstname">Prénom</string>
+    <string name="date_of_birth">Date de naissance</string>
+    <string name="birthday_input_hint">../../..</string>
+    <string name="save">Sauvegarder</string>
+    <string name="view_data">Voir les données</string>
+    <string name="encrypt">Chiffrer</string>
+    <string name="decrypt">Déchiffrer</string>
+    <string name="save_in_database">Sauvegarder en BDD</string>
+    <string name="read_in_database">Lire en BDD</string>
+    <string name="empty_input">Veuillez remplir tout le formulaire</string>
+    <string name="age">Âge</string>
+    <string name="my_infos">Mes informations</string>
 </resources>

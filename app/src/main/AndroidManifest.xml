@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".LifeCycleActivity"
+        <activity android:name=".BackupActivity"></activity>
+        <activity
+            android:name=".LifeCycleActivity"
             android:screenOrientation="sensor" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".LoginActivity">
