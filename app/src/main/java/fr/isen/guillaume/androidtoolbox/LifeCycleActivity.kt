@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import fr.isen.guillaume.androidtoolbox.lifecycle.LifeCycleOneFragment
+import fr.isen.guillaume.androidtoolbox.lifecycle.LifeCycleTwoFragment
+import fr.isen.guillaume.androidtoolbox.tools.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_life_cycle.*
 
 enum class State {
@@ -16,7 +19,13 @@ class LifeCycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_life_cycle)
 
+        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        val fragmentOne = LifeCycleOneFragment()
+        val fragmentTwo = LifeCycleTwoFragment()
+
         notification(State.FOREGROUND)
+        initViewPager(viewPagerAdapter, fragmentOne, fragmentTwo)
+        btnFragment.setOnClickListener { alternFragment(viewPagerAdapter, fragmentOne, fragmentTwo) }
     }
 
     override fun onStart() {
@@ -50,5 +59,22 @@ class LifeCycleActivity : AppCompatActivity() {
             State.BACKGROUND -> Log.d("TAG", getString(R.string.activity_background))
             State.DESTROY -> Toast.makeText(this, getString(R.string.activity_destroyed), Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun initViewPager(viewPagerAdapter: ViewPagerAdapter, fragmentOne: LifeCycleOneFragment, fragmentTwo: LifeCycleTwoFragment) {
+        viewPagerAdapter.addFragment(fragmentOne)
+        viewPagerAdapter.addFragment(fragmentTwo)
+        viewPagerFragment.adapter = viewPagerAdapter
+    }
+
+    private fun checkCurrentPage(viewPagerAdapter: ViewPagerAdapter, fragmentTwo: LifeCycleTwoFragment): Boolean {
+        return viewPagerFragment.currentItem == viewPagerAdapter.getItemPosition(fragmentTwo)
+    }
+
+    private fun alternFragment(viewPagerAdapter: ViewPagerAdapter, fragmentOne: LifeCycleOneFragment, fragmentTwo: LifeCycleTwoFragment) {
+        if (checkCurrentPage(viewPagerAdapter, fragmentTwo))
+            viewPagerFragment.setCurrentItem(viewPagerAdapter.getItemPosition(fragmentOne), true)
+        else
+            viewPagerFragment.setCurrentItem(viewPagerAdapter.getItemPosition(fragmentTwo), true)
     }
 }

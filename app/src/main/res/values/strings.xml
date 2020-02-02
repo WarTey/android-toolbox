@@ -22,4 +22,13 @@
     <string name="activity_foreground">Activity Foreground</string>
     <string name="activity_background">Activity Background</string>
     <string name="activity_destroyed">Activity Destroyed</string>
+    <string name="fragment_one_foreground">Fragment One Foreground</string>
+    <string name="fragment_one_background">Fragment One Background</string>
+    <string name="fragment_one_destroyed">Fragment One Destroyed</string>
+    <string name="fragment_two_foreground">Fragment Two Foreground</string>
+    <string name="fragment_two_background">Fragment Two Background</string>
+    <string name="fragment_two_destroyed">Fragment Two Destroyed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
