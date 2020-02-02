@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">AndroidToolBox</string>
+    <string name="app_name">Android ToolBox</string>
+    <string name="welcome">Bonjour</string>
+    <string name="cybersecurity_logo">Logo Cybersécurité</string>
+    <string name="life_cycle_button">Bouton cycle de vie</string>
+    <string name="life_cycle">Cycle de vie</string>
+    <string name="backup">Sauvegarde</string>
+    <string name="backup_button">Bouton sauvegarde</string>
+    <string name="permissions">Permissions</string>
+    <string name="permissions_button">Bouton permissions</string>
+    <string name="webservices">Webservices</string>
+    <string name="webservices_button">Bouton webservices</string>
+    <string name="logout_button">Bouton déconnexion</string>
+    <string name="connection">Connexion</string>
+    <string name="inputUsername">Identifiant</string>
+    <string name="validate">Valider</string>
+    <string name="username">Identifiant</string>
+    <string name="password">Mot de passe</string>
 </resources>
