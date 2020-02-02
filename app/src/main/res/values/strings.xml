@@ -17,4 +17,9 @@
     <string name="username">Identifiant</string>
     <string name="password">Mot de passe</string>
     <string name="wrong_credentials">Mauvais identifiant et/ou mot de passe</string>
+    <string name="state">State</string>
+    <string name="toggle_display">Alterner l\'affichage</string>
+    <string name="activity_foreground">Activity Foreground</string>
+    <string name="activity_background">Activity Background</string>
+    <string name="activity_destroyed">Activity Destroyed</string>
 </resources>
