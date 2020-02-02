@@ -16,4 +16,5 @@
     <string name="validate">Valider</string>
     <string name="username">Identifiant</string>
     <string name="password">Mot de passe</string>
+    <string name="wrong_credentials">Mauvais identifiant et/ou mot de passe</string>
 </resources>
