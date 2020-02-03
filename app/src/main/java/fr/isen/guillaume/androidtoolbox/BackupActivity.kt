@@ -21,6 +21,8 @@ import java.util.*
 
 class BackupActivity : AppCompatActivity() {
 
+    val workerThread = WorkerThread(THREAD_NAME)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_backup)
@@ -28,7 +30,6 @@ class BackupActivity : AppCompatActivity() {
         val fileJson = cacheDir.absolutePath + "/users.json"
         val fileSecure = cacheDir.absolutePath + "/users.txt"
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val workerThread = WorkerThread(THREAD_NAME)
         val backupDatabase = BackupDatabase.getInstance(this)
 
         initDateField()
@@ -37,8 +38,8 @@ class BackupActivity : AppCompatActivity() {
         btnSeeSave.setOnClickListener { getData(false, fileJson, sharedPreferences) }
         btnSecureSave.setOnClickListener { writeData(true, fileSecure, sharedPreferences) }
         btnSecureSeeSave.setOnClickListener { getData(true, fileSecure, sharedPreferences) }
-        btnSaveDb.setOnClickListener { insertBackup(workerThread, backupDatabase) }
-        btnSeeDb.setOnClickListener { fetchBackup(workerThread, backupDatabase) }
+        btnSaveDb.setOnClickListener { insertBackup(backupDatabase) }
+        btnSeeDb.setOnClickListener { fetchBackup(backupDatabase) }
     }
 
     private fun initDateField() {
@@ -78,7 +79,7 @@ class BackupActivity : AppCompatActivity() {
         showPopup(backup)
     }
 
-    private fun insertBackup(workerThread: WorkerThread, backupDatabase: BackupDatabase?) {
+    private fun insertBackup(backupDatabase: BackupDatabase?) {
         if (!checkEmptyFields(txtName.text.toString(), txtFirstname.text.toString(), txtBirthday.text.toString())) {
             val backup = BackupRoom()
             backup.name = txtName.text.toString()
@@ -90,7 +91,7 @@ class BackupActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.empty_input), Toast.LENGTH_LONG).show()
     }
 
-    private fun fetchBackup(workerThread: WorkerThread, backupDatabase: BackupDatabase?) {
+    private fun fetchBackup(backupDatabase: BackupDatabase?) {
         val task = Runnable {
             val backup = backupDatabase?.backupDao()?.getLastUser()
             Handler().post {
@@ -107,6 +108,12 @@ class BackupActivity : AppCompatActivity() {
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setMessage(getString(R.string.firstname) + ": " + backup.firstname + "\n" + getString(R.string.name) + ": " + backup.name + "\n" + getString(R.string.date_of_birth) + ": " + backup.birthday + "\n" + getString(R.string.age) + ": " + backup.getAge()).setTitle(getString(R.string.my_infos))
         alertDialog.create().show()
+    }
+
+    override fun onDestroy() {
+        BackupDatabase.destroyInstance()
+        workerThread.quit()
+        super.onDestroy()
     }
 
     companion object {
