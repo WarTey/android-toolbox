@@ -21,7 +21,7 @@ import java.util.*
 
 class BackupActivity : AppCompatActivity() {
 
-    val workerThread = WorkerThread(THREAD_NAME)
+    private val workerThread = WorkerThread(THREAD_NAME)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

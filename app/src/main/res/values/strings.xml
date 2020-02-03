@@ -42,4 +42,10 @@
     <string name="age">Âge</string>
     <string name="my_infos">Mes informations</string>
     <string name="error_database_read">Erreur lors de la lecture BDD</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="latitude">Latitude :</string>
+    <string name="longitude">Longitude :</string>
+    <string name="no_data">No Data</string>
+    <string name="image_source">Source de l\'image?</string>
+    <string name="error_permissions">Vous n\'avez pas accepté les permissions</string>
 </resources>

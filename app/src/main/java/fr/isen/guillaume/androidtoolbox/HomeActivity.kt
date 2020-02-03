@@ -15,6 +15,7 @@ class HomeActivity : AppCompatActivity() {
         imgLifeCycle.setOnClickListener { startActivity(Intent(this, LifeCycleActivity::class.java)) }
         imgLogout.setOnClickListener { logout() }
         imgBackup.setOnClickListener { startActivity(Intent(this, BackupActivity::class.java)) }
+        imgPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
     }
 
     private fun logout() {
