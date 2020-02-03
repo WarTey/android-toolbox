@@ -57,10 +57,8 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             REQUESTS -> {
-                if (grantResults.isNotEmpty() && !permissions.isNullOrEmpty() && permissions[1] == PERMISSIONS[1] && grantResults[1] == PackageManager.PERMISSION_GRANTED && permissions[2] == PERMISSIONS[2] && grantResults[2] == PackageManager.PERMISSION_GRANTED)
-                    getPos()
-                if (grantResults.isNotEmpty() && !permissions.isNullOrEmpty() && permissions[0] == PERMISSIONS[0] && grantResults[0] == PackageManager.PERMISSION_GRANTED && permissions[1] == PERMISSIONS[1] && grantResults[1] == PackageManager.PERMISSION_GRANTED && permissions[2] == PERMISSIONS[2] && grantResults[2] == PackageManager.PERMISSION_GRANTED)
-                    getContacts()
+                getPos()
+                getContacts()
             }
         }
     }
@@ -79,7 +77,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
     }
 
     private fun getContacts() {
-        if (checkPermissions(CONTACTS_PERMISSIONS, getString(R.string.error_contacts_permissions))) {
+        if (checkPermissions(CONTACTS_PERMISSIONS, getString(R.string.error_permissions))) {
             val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
             val contacts = ArrayList<Contact>()
             cursor?.let {
@@ -99,7 +97,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
                     recyclerPermissions.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
                     recyclerPermissions.adapter = RecyclerAdapter(contacts)
                 } else
-                    Toast.makeText(this, getString(R.string.no_contacts), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.no_contacts), Toast.LENGTH_LONG).show()
                 cursor.close()
             }
         }
@@ -127,16 +125,20 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
 
     @SuppressLint("MissingPermission")
     private fun getPos() {
-        if (checkPermissions(POS_PERMISSIONS, getString(R.string.error_pos_permissions))) {
+        if (checkPermissions(POS_PERMISSIONS, getString(R.string.error_permissions))) {
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            val services = arrayOf(locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER), locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
-            val providers = arrayOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
+            locationManager?.let {
+                val services = arrayOf(it.isProviderEnabled(LocationManager.GPS_PROVIDER), it.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+                val providers = arrayOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
 
-            for ((index, service) in services.withIndex()) {
-                service?.let {
-                    if (service) {
-                        locationManager?.requestLocationUpdates(providers[index], 5000, 0f, this)
-                        comparePos(locationManager?.getLastKnownLocation(providers[index]))
+                if (!services[0] && !services[1])
+                    Toast.makeText(this, getString(R.string.location_not_activated), Toast.LENGTH_LONG).show()
+                else {
+                    for ((index, service) in services.withIndex()) {
+                        if (service) {
+                            it.requestLocationUpdates(providers[index], 5000, 0f, this)
+                            comparePos(it.getLastKnownLocation(providers[index]))
+                        }
                     }
                 }
             }
@@ -145,17 +147,17 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
 
     private fun comparePos(location: Location?) {
         if (location != null) {
-            if (coordinate != null) {
-                coordinate?.accuracy?.let {
-                    if (it < location.accuracy) {
-                        valLatitude.text = location.latitude.toString()
-                        valLongitude.text = location.longitude.toString()
-                        coordinate = Coordinate(location.latitude, location.longitude, location.accuracy)
-                    }
-                }
-            } else
-                coordinate = Coordinate(location.latitude, location.longitude, location.accuracy)
+            if (coordinate != null)
+                coordinate?.accuracy?.let { if (it < location.accuracy) updateCoord(location) }
+            else
+                updateCoord(location)
         }
+    }
+
+    private fun updateCoord(location: Location?) {
+        valLatitude.text = location?.latitude.toString()
+        valLongitude.text = location?.longitude.toString()
+        coordinate = Coordinate(location?.latitude, location?.longitude, location?.accuracy)
     }
 
     private fun initRequest() {
