@@ -26,14 +26,16 @@ import fr.isen.guillaume.androidtoolbox.model.Coordinate
 import fr.isen.guillaume.androidtoolbox.recycler.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_permissions.*
 
-class PermissionsActivity : AppCompatActivity() {
+class PermissionsActivity : AppCompatActivity(), LocationListener {
+
+    private var locationManager: LocationManager? = null
+    private var coordinate: Coordinate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permissions)
 
-        getContacts()
-        getPos()
+        initRequest()
         imgGallery.setOnClickListener { getImageSource() }
     }
 
@@ -54,17 +56,11 @@ class PermissionsActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            CONTACTS_REQUEST -> {
-                if (grantResults.isNotEmpty() && !permissions.isNullOrEmpty() && permissions[0] == CONTACTS_PERMISSIONS[0] && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    getContacts()
-                else
-                    Toast.makeText(this, R.string.error_permissions, Toast.LENGTH_LONG).show()
-            }
-            POS_REQUEST -> {
-                if (grantResults.isNotEmpty() && !permissions.isNullOrEmpty() && permissions[0] == POS_PERMISSIONS[0] && grantResults[0] == PackageManager.PERMISSION_GRANTED && permissions[1] == POS_PERMISSIONS[1] && grantResults[1] == PackageManager.PERMISSION_GRANTED)
+            REQUESTS -> {
+                if (grantResults.isNotEmpty() && !permissions.isNullOrEmpty() && permissions[1] == PERMISSIONS[1] && grantResults[1] == PackageManager.PERMISSION_GRANTED && permissions[2] == PERMISSIONS[2] && grantResults[2] == PackageManager.PERMISSION_GRANTED)
                     getPos()
-                else
-                    Toast.makeText(this, getString(R.string.error_permissions), Toast.LENGTH_SHORT).show()
+                if (grantResults.isNotEmpty() && !permissions.isNullOrEmpty() && permissions[0] == PERMISSIONS[0] && grantResults[0] == PackageManager.PERMISSION_GRANTED && permissions[1] == PERMISSIONS[1] && grantResults[1] == PackageManager.PERMISSION_GRANTED && permissions[2] == PERMISSIONS[2] && grantResults[2] == PackageManager.PERMISSION_GRANTED)
+                    getContacts()
             }
         }
     }
@@ -83,7 +79,7 @@ class PermissionsActivity : AppCompatActivity() {
     }
 
     private fun getContacts() {
-        if (checkPermissions(CONTACTS_PERMISSIONS, CONTACTS_REQUEST)) {
+        if (checkPermissions(CONTACTS_PERMISSIONS, getString(R.string.error_contacts_permissions))) {
             val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
             val contacts = ArrayList<Contact>()
             cursor?.let {
@@ -131,63 +127,76 @@ class PermissionsActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun getPos() {
-        if (checkPermissions(POS_PERMISSIONS, POS_REQUEST)) {
-            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            val services = arrayOf(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER), locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+        if (checkPermissions(POS_PERMISSIONS, getString(R.string.error_pos_permissions))) {
+            locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val services = arrayOf(locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER), locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
             val providers = arrayOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
-            val locations = arrayOf(Coordinate(null, null, null), Coordinate(null, null, null))
 
             for ((index, service) in services.withIndex()) {
-                if (service) {
-                    locationManager.requestLocationUpdates(providers[index], 5000, 0.toFloat(), object : LocationListener {
-                        override fun onLocationChanged(location: Location?) {
-                            if (location != null) {
-                                locations[index] = Coordinate(location.latitude, location.longitude, location.accuracy)
-                                comparePos(locations)
-                            }
-                        }
-
-                        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) { }
-
-                        override fun onProviderEnabled(provider: String?) { }
-
-                        override fun onProviderDisabled(provider: String?) { }
-                    })
+                service?.let {
+                    if (service) {
+                        locationManager?.requestLocationUpdates(providers[index], 5000, 0f, this)
+                        comparePos(locationManager?.getLastKnownLocation(providers[index]))
+                    }
                 }
             }
         }
     }
 
-    private fun comparePos(coordinates: Array<Coordinate>) {
-        coordinates[0].accuracy?.let { accuracyGps ->
-            coordinates[1].accuracy?.let { accuracyNetwork ->
-                if (accuracyGps > accuracyNetwork) {
-                    valLatitude.text = coordinates[0].latitude.toString()
-                    valLongitude.text = coordinates[0].longitude.toString()
-                } else {
-                    valLatitude.text = coordinates[1].latitude.toString()
-                    valLongitude.text = coordinates[1].longitude.toString()
+    private fun comparePos(location: Location?) {
+        if (location != null) {
+            if (coordinate != null) {
+                coordinate?.accuracy?.let {
+                    if (it < location.accuracy) {
+                        valLatitude.text = location.latitude.toString()
+                        valLongitude.text = location.longitude.toString()
+                        coordinate = Coordinate(location.latitude, location.longitude, location.accuracy)
+                    }
                 }
-            }
+            } else
+                coordinate = Coordinate(location.latitude, location.longitude, location.accuracy)
         }
     }
 
-    private fun checkPermissions(permissions: Array<String>, requestCode: Int): Boolean {
+    private fun initRequest() {
+        if (!checkPermissions(PERMISSIONS, null))
+            ActivityCompat.requestPermissions(this, PERMISSIONS, REQUESTS)
+        else {
+            getPos()
+            getContacts()
+        }
+    }
+
+    private fun checkPermissions(permissions: Array<String>, message: String?): Boolean {
         permissions.forEach {
             if (ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(this, permissions, requestCode)
+                if (!message.isNullOrEmpty())
+                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                 return false
             }
         }
         return true
     }
 
+    override fun onStop() {
+        super.onStop()
+        locationManager?.removeUpdates(this)
+    }
+
     companion object {
         private val CONTACTS_PERMISSIONS = arrayOf(Manifest.permission.READ_CONTACTS)
         private val POS_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-        private const val CONTACTS_REQUEST = 1000
-        private const val POS_REQUEST = 1001
+        private val PERMISSIONS = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+        private const val REQUESTS = 1000
         private const val CHOOSER = 1
         private const val CAPTURE_DATA = "data"
     }
+
+    override fun onLocationChanged(location: Location?) { comparePos(location) }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) { }
+
+    override fun onProviderEnabled(provider: String?) { }
+
+    override fun onProviderDisabled(provider: String?) { }
 }

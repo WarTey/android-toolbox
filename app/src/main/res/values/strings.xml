@@ -47,7 +47,8 @@
     <string name="longitude">Longitude :</string>
     <string name="no_data">No Data</string>
     <string name="image_source">Source de l\'image?</string>
-    <string name="error_permissions">Vous n\'avez pas accepté les permissions</string>
+    <string name="error_contacts_permissions">Vous n\'avez pas autorisé l\'accès aux contacts</string>
+    <string name="error_pos_permissions">Vous n\'avez pas autorisé l\'accès à votre position</string>
     <string name="no_contacts">Vous n\'avez pas de contacts</string>
     <string name="logo_contact">Logo Contact</string>
 </resources>
