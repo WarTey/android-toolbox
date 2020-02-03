@@ -6,10 +6,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import com.google.gson.Gson
+import fr.isen.guillaume.androidtoolbox.database.BackupDatabase
 import fr.isen.guillaume.androidtoolbox.model.Backup
+import fr.isen.guillaume.androidtoolbox.model.BackupRoom
 import fr.isen.guillaume.androidtoolbox.security.DataSecurity
+import fr.isen.guillaume.androidtoolbox.thread.WorkerThread
 import kotlinx.android.synthetic.main.activity_backup.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -24,12 +28,17 @@ class BackupActivity : AppCompatActivity() {
         val fileJson = cacheDir.absolutePath + "/users.json"
         val fileSecure = cacheDir.absolutePath + "/users.txt"
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val workerThread = WorkerThread(THREAD_NAME)
+        val backupDatabase = BackupDatabase.getInstance(this)
 
         initDateField()
+        workerThread.start()
         btnSave.setOnClickListener { writeData(false, fileJson, sharedPreferences) }
         btnSeeSave.setOnClickListener { getData(false, fileJson, sharedPreferences) }
         btnSecureSave.setOnClickListener { writeData(true, fileSecure, sharedPreferences) }
         btnSecureSeeSave.setOnClickListener { getData(true, fileSecure, sharedPreferences) }
+        btnSaveDb.setOnClickListener { insertBackup(workerThread, backupDatabase) }
+        btnSeeDb.setOnClickListener { fetchBackup(workerThread, backupDatabase) }
     }
 
     private fun initDateField() {
@@ -69,6 +78,31 @@ class BackupActivity : AppCompatActivity() {
         showPopup(backup)
     }
 
+    private fun insertBackup(workerThread: WorkerThread, backupDatabase: BackupDatabase?) {
+        if (!checkEmptyFields(txtName.text.toString(), txtFirstname.text.toString(), txtBirthday.text.toString())) {
+            val backup = BackupRoom()
+            backup.name = txtName.text.toString()
+            backup.firstname = txtFirstname.text.toString()
+            backup.birthday = txtBirthday.text.toString()
+            val task = Runnable { backupDatabase?.backupDao()?.insert(backup) }
+            workerThread.postTask(task)
+        } else
+            Toast.makeText(this, getString(R.string.empty_input), Toast.LENGTH_LONG).show()
+    }
+
+    private fun fetchBackup(workerThread: WorkerThread, backupDatabase: BackupDatabase?) {
+        val task = Runnable {
+            val backup = backupDatabase?.backupDao()?.getLastUser()
+            Handler().post {
+                if (backup == null)
+                    Toast.makeText(this, getString(R.string.error_database_read), Toast.LENGTH_LONG).show()
+                else
+                    showPopup(Backup(backup.name, backup.firstname, backup.birthday))
+            }
+        }
+        workerThread.postTask(task)
+    }
+
     private fun showPopup(backup: Backup) {
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setMessage(getString(R.string.firstname) + ": " + backup.firstname + "\n" + getString(R.string.name) + ": " + backup.name + "\n" + getString(R.string.date_of_birth) + ": " + backup.birthday + "\n" + getString(R.string.age) + ": " + backup.getAge()).setTitle(getString(R.string.my_infos))
@@ -78,5 +112,6 @@ class BackupActivity : AppCompatActivity() {
     companion object {
         private const val PREFS_NAME = "KeyToolBox"
         private const val DATE_PATTERN = "dd-MM-yyyy"
+        private const val THREAD_NAME = "WorkerThread"
     }
 }

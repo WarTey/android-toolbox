@@ -41,4 +41,5 @@
     <string name="empty_input">Veuillez remplir tout le formulaire</string>
     <string name="age">Âge</string>
     <string name="my_infos">Mes informations</string>
+    <string name="error_database_read">Erreur lors de la lecture BDD</string>
 </resources>
