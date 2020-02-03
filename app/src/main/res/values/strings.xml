@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android ToolBox</string>
+    <string name="app_name">Guillaume BDL</string>
     <string name="welcome">Bonjour</string>
     <string name="cybersecurity_logo">Logo Cybersécurité</string>
     <string name="life_cycle_button">Bouton cycle de vie</string>
@@ -48,4 +48,6 @@
     <string name="no_data">No Data</string>
     <string name="image_source">Source de l\'image?</string>
     <string name="error_permissions">Vous n\'avez pas accepté les permissions</string>
+    <string name="no_contacts">Vous n\'avez pas de contacts</string>
+    <string name="logo_contact">Logo Contact</string>
 </resources>
