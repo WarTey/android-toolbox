@@ -1,10 +1,11 @@
-package fr.isen.guillaume.androidtoolbox.recycler
+package fr.isen.guillaume.androidtoolbox.recycler.contact
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.guillaume.androidtoolbox.R
 import fr.isen.guillaume.androidtoolbox.model.Contact
+import fr.isen.guillaume.androidtoolbox.recycler.contact.ContactViewHolder
 
 class RecyclerAdapter(private val contacts: ArrayList<Contact>): RecyclerView.Adapter<ContactViewHolder>() {
 
@@ -14,7 +15,5 @@ class RecyclerAdapter(private val contacts: ArrayList<Contact>): RecyclerView.Ad
 
     override fun getItemCount() = contacts.size
 
-    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.bindContact(contacts[position])
-    }
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) { holder.bindContact(contacts[position]) }
 }

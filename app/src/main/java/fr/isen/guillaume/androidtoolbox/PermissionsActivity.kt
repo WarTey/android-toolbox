@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.isen.guillaume.androidtoolbox.model.Contact
 import fr.isen.guillaume.androidtoolbox.model.Coordinate
-import fr.isen.guillaume.androidtoolbox.recycler.RecyclerAdapter
+import fr.isen.guillaume.androidtoolbox.recycler.contact.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_permissions.*
 
 class PermissionsActivity : AppCompatActivity(), LocationListener {

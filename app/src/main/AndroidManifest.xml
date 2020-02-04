@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".WebservicesActivity"></activity>
+        <activity
+            android:name=".WebservicesActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PermissionsActivity"
             android:screenOrientation="portrait" />

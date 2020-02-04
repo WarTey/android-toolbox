@@ -16,6 +16,7 @@ class HomeActivity : AppCompatActivity() {
         imgLogout.setOnClickListener { logout() }
         imgBackup.setOnClickListener { startActivity(Intent(this, BackupActivity::class.java)) }
         imgPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
+        imgWebservices.setOnClickListener { startActivity(Intent(this, WebservicesActivity::class.java)) }
     }
 
     private fun logout() {

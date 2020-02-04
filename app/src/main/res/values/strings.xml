@@ -51,4 +51,5 @@
     <string name="no_contacts">Vous n\'avez pas de contacts</string>
     <string name="logo_contact">Logo Contact</string>
     <string name="location_not_activated">La localisation n\'est pas activée sur votre téléphone</string>
+    <string name="error_users_webservices">Erreur lors de la récupération d\'utilisateurs</string>
 </resources>

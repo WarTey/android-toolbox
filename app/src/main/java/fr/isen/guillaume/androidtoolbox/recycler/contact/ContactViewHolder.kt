@@ -1,4 +1,4 @@
-package fr.isen.guillaume.androidtoolbox.recycler
+package fr.isen.guillaume.androidtoolbox.recycler.contact
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
