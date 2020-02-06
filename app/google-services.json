@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "613353553250",
+    "firebase_url": "https://android-toolbox-12ad3.firebaseio.com",
+    "project_id": "android-toolbox-12ad3",
+    "storage_bucket": "android-toolbox-12ad3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613353553250:android:e06a7c0e7389a75f9b803b",
+        "android_client_info": {
+          "package_name": "fr.isen.guillaume.androidtoolbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613353553250-druke7e7lvoffhfiqt2q8bb0qd6e8r5s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.isen.guillaume.androidtoolbox",
+            "certificate_hash": "e5943e3310e30e15d9a065d2a23e0957749414bf"
+          }
+        },
+        {
+          "client_id": "613353553250-j9ousdsn3293e3ro76g0i6ca7ilfo0rd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA67YOHPZOq6aySdqhnRE6FzCyEU7zhdk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613353553250-j9ousdsn3293e3ro76g0i6ca7ilfo0rd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
