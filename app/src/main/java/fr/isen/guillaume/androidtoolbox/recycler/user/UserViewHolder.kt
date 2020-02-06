@@ -13,10 +13,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val address = user.location.street.number + " " + user.location.state + " " + user.location.street.name + " " + user.location.city
         itemView.txtName.text = name
         itemView.txtMail.text = user.email
-        itemView.txtAddress.text = if (address.length > 30)
-            address.substring(0, 30) + "..."
-        else
-            address
+        itemView.txtAddress.text = address
         Picasso.get().load(user.picture.large).into(itemView.imgRandom)
     }
 }

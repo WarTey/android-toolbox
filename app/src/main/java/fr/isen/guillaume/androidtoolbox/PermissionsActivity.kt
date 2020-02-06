@@ -95,7 +95,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
                     }
                     recyclerPermissions.layoutManager = LinearLayoutManager(this)
                     recyclerPermissions.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-                    recyclerPermissions.adapter = RecyclerAdapter(contacts)
+                    recyclerPermissions.adapter = RecyclerAdapter(contacts, applicationContext)
                 } else
                     Toast.makeText(this, getString(R.string.no_contacts), Toast.LENGTH_LONG).show()
                 cursor.close()

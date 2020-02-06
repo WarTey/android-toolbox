@@ -58,9 +58,9 @@
     <string name="latitude_hint">Latitude :</string>
     <string name="longitude_hint">Longitude :</string>
     <string name="image_source">Source de l\'image?</string>
-    <string name="name_hint">Nom :</string>
-    <string name="number_hint">Numéro :</string>
-    <string name="email_hint">Email :</string>
+    <string name="name_hint">Nom : %1$s</string>
+    <string name="number_hint">Numéro : %1$s</string>
+    <string name="email_hint">Email : %1$s</string>
     <string name="error_permissions">Vous n\'avez pas accepté toutes les permissions</string>
     <string name="no_contacts">Vous n\'avez pas de contacts</string>
     <string name="logo_contact">Logo Contact</string>
