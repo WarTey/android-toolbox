@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Nom :"
+        android:text="@string/name_hint"
         app:layout_constraintBottom_toTopOf="@id/emailContact"
         app:layout_constraintStart_toEndOf="@id/imgContact"
         app:layout_constraintTop_toBottomOf="@id/numberContact" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Numéro :"
+        android:text="@string/number_hint"
         app:layout_constraintStart_toEndOf="@id/imgContact"
         app:layout_constraintTop_toTopOf="@id/imgContact" />
 
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="Email :"
+        android:text="@string/email_hint"
         app:layout_constraintBottom_toBottomOf="@id/imgContact"
         app:layout_constraintStart_toEndOf="@id/imgContact" />
 

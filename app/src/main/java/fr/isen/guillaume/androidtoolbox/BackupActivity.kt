@@ -117,7 +117,7 @@ class BackupActivity : AppCompatActivity() {
 
     private fun showPopup(backup: Backup) {
         val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setMessage(getString(R.string.firstname) + ": " + backup.firstname + "\n" + getString(R.string.name) + ": " + backup.name + "\n" + getString(R.string.date_of_birth) + ": " + backup.birthday + "\n" + getString(R.string.age) + ": " + backup.getAge()).setTitle(getString(R.string.my_infos))
+        alertDialog.setMessage(getString(R.string.alert_saved_infos, backup.firstname, backup.name, backup.birthday, backup.getAge())).setTitle(getString(R.string.my_infos))
         alertDialog.create().show()
     }
 

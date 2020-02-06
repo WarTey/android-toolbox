@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
     private fun login(sharedPreferences: SharedPreferences) {
         if (authCheck()) {
             setSharedPreferences(sharedPreferences)
-            Toast.makeText(this, getString(R.string.welcome) + " " + txtUsername.text.toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.welcome_name, txtUsername.text.toString()), Toast.LENGTH_LONG).show()
             goToHome()
         } else
             Toast.makeText(this, getString(R.string.wrong_credentials), Toast.LENGTH_LONG).show()

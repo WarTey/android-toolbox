@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/latitude"
+            android:text="@string/latitude_hint"
             app:layout_constraintStart_toEndOf="@id/imgGallery"
             app:layout_constraintTop_toTopOf="@id/imgGallery" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/longitude"
+            android:text="@string/longitude_hint"
             app:layout_constraintBottom_toBottomOf="@id/imgGallery"
             app:layout_constraintStart_toEndOf="@id/imgGallery" />
 

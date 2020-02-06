@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">Guillaume BDL</string>
-    <string name="welcome">Bonjour</string>
+
+    <!-- LoginActivity -->
+    <string name="connection">Connexion</string>
     <string name="cybersecurity_logo">Logo Cybersécurité</string>
-    <string name="life_cycle_button">Bouton cycle de vie</string>
+    <string name="username">Identifiant</string>
+    <string name="password">Mot de passe</string>
+    <string name="validate">Valider</string>
+    <string name="wrong_credentials">Mauvais identifiant et/ou mot de passe</string>
+    <string name="welcome_name">Bonjour %1$s</string>
+
+    <!-- HomeActivity -->
+    <string name="welcome">Bonjour</string>
     <string name="life_cycle">Cycle de vie</string>
+    <string name="life_cycle_button">Bouton cycle de vie</string>
     <string name="backup">Sauvegarde</string>
     <string name="backup_button">Bouton sauvegarde</string>
     <string name="permissions">Permissions</string>
@@ -11,12 +21,8 @@
     <string name="webservices">Webservices</string>
     <string name="webservices_button">Bouton webservices</string>
     <string name="logout_button">Bouton déconnexion</string>
-    <string name="connection">Connexion</string>
-    <string name="inputUsername">Identifiant</string>
-    <string name="validate">Valider</string>
-    <string name="username">Identifiant</string>
-    <string name="password">Mot de passe</string>
-    <string name="wrong_credentials">Mauvais identifiant et/ou mot de passe</string>
+
+    <!-- LifeCycleActivity -->
     <string name="state">State</string>
     <string name="toggle_display">Alterner l\'affichage</string>
     <string name="activity_foreground">Activity Foreground</string>
@@ -28,6 +34,8 @@
     <string name="fragment_two_foreground">Fragment Two Foreground</string>
     <string name="fragment_two_background">Fragment Two Background</string>
     <string name="fragment_two_destroyed">Fragment Two Destroyed</string>
+
+    <!-- BackupActivity -->
     <string name="name">Nom</string>
     <string name="firstname">Prénom</string>
     <string name="date_of_birth">Date de naissance</string>
@@ -39,18 +47,25 @@
     <string name="save_in_database">Sauvegarder en BDD</string>
     <string name="read_in_database">Lire en BDD</string>
     <string name="empty_input">Veuillez remplir tout le formulaire</string>
-    <string name="age">Âge</string>
+    <string name="invalid_date">Cette date n\'est pas valide</string>
     <string name="my_infos">Mes informations</string>
+    <string name="alert_saved_infos">Prénom: %1$s\nNom: %2$s\nDate de naissance: %3$s\nÂge: %4$d</string>
     <string name="error_database_read">Erreur lors de la lecture BDD</string>
+
+    <!-- PermissionsActivity -->
     <string name="select_picture">Select Picture</string>
-    <string name="latitude">Latitude :</string>
-    <string name="longitude">Longitude :</string>
     <string name="no_data">No Data</string>
+    <string name="latitude_hint">Latitude :</string>
+    <string name="longitude_hint">Longitude :</string>
     <string name="image_source">Source de l\'image?</string>
+    <string name="name_hint">Nom :</string>
+    <string name="number_hint">Numéro :</string>
+    <string name="email_hint">Email :</string>
     <string name="error_permissions">Vous n\'avez pas accepté toutes les permissions</string>
     <string name="no_contacts">Vous n\'avez pas de contacts</string>
     <string name="logo_contact">Logo Contact</string>
     <string name="location_not_activated">La localisation n\'est pas activée sur votre téléphone</string>
+
+    <!-- WebservicesActivity -->
     <string name="error_users_webservices">Erreur lors de la récupération d\'utilisateurs</string>
-    <string name="invalid_date">Cette date n\'est pas valide</string>
 </resources>
