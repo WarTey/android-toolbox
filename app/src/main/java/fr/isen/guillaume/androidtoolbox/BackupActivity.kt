@@ -32,8 +32,9 @@ class BackupActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val backupDatabase = BackupDatabase.getInstance(this)
 
-        initDateField()
+        setDateField()
         workerThread.start()
+
         btnSave.setOnClickListener { writeData(false, fileJson, sharedPreferences) }
         btnSeeSave.setOnClickListener { getData(false, fileJson, sharedPreferences) }
         btnSecureSave.setOnClickListener { writeData(true, fileSecure, sharedPreferences) }
@@ -42,13 +43,23 @@ class BackupActivity : AppCompatActivity() {
         btnSeeDb.setOnClickListener { fetchBackup(backupDatabase) }
     }
 
-    private fun initDateField() {
+    private fun checkValidDate(date: Calendar): Boolean {
+        return if (date.timeInMillis <= Calendar.getInstance().timeInMillis)
+            true
+        else {
+            Toast.makeText(this, getString(R.string.invalid_date), Toast.LENGTH_LONG).show()
+            false
+        }
+    }
+
+    private fun setDateField() {
         val calendar = Calendar.getInstance()
         txtBirthday.setOnClickListener {
             DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 val date = Calendar.getInstance()
                 date.set(year, month, dayOfMonth)
-                txtBirthday.text = SimpleDateFormat(DATE_PATTERN, Locale.FRANCE).format(date.time)
+                if (checkValidDate(date))
+                    txtBirthday.text = SimpleDateFormat(DATE_PATTERN, Locale.FRANCE).format(date.time)
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
     }
