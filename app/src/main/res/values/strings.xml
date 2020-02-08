@@ -6,8 +6,10 @@
     <string name="cybersecurity_logo">Logo Cybersécurité</string>
     <string name="username">Identifiant</string>
     <string name="password">Mot de passe</string>
-    <string name="validate">Valider</string>
-    <string name="wrong_credentials">Mauvais identifiant et/ou mot de passe</string>
+    <string name="validate">Connexion</string>
+    <string name="password_forget">Mot de passe oublié ?</string>
+    <string name="password_retrieve">Identifiant : %1$s\nMot de passe : %2$s</string>
+    <string name="ok_btn">OK</string>
     <string name="welcome_name">Bonjour %1$s</string>
 
     <!-- HomeActivity -->
@@ -49,7 +51,7 @@
     <string name="empty_input">Veuillez remplir tout le formulaire</string>
     <string name="invalid_date">Cette date n\'est pas valide</string>
     <string name="my_infos">Mes informations</string>
-    <string name="alert_saved_infos">Prénom: %1$s\nNom: %2$s\nDate de naissance: %3$s\nÂge: %4$d</string>
+    <string name="alert_saved_infos">Prénom : %1$s\nNom : %2$s\nDate de naissance : %3$s\nÂge : %4$d</string>
     <string name="error_database_read">Erreur lors de la lecture BDD</string>
 
     <!-- PermissionsActivity -->
