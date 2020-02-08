@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -12,11 +14,17 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        welcomeMessage()
+
         imgLifeCycle.setOnClickListener { startActivity(Intent(this, LifeCycleActivity::class.java)) }
         imgLogout.setOnClickListener { logout() }
         imgBackup.setOnClickListener { startActivity(Intent(this, BackupActivity::class.java)) }
         imgPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
         imgWebservices.setOnClickListener { startActivity(Intent(this, WebservicesActivity::class.java)) }
+    }
+
+    private fun welcomeMessage() {
+        Snackbar.make(layoutHome, getString(R.string.welcome_name, intent.getStringExtra("username")), Snackbar.LENGTH_LONG).setBackgroundTint(ContextCompat.getColor(this, R.color.colorPrimaryDark)).show()
     }
 
     private fun logout() {
