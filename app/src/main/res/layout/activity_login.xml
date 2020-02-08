@@ -7,6 +7,16 @@
     android:animateLayoutChanges="true"
     tools:context=".LoginActivity">
 
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundColor="@android:color/white"
+        app:maxParticleRadius="3"
+        app:minParticleRadius="3"
+        app:particleColor="@color/colorPrimary"
+        app:particleCount="8" />
+
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="150dp"
@@ -33,7 +43,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@android:color/transparent"
+            app:boxBackgroundColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -55,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="65dp"
-            app:boxBackgroundColor="@android:color/transparent"
+            app:boxBackgroundColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputUsername"
