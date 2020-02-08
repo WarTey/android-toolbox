@@ -96,16 +96,14 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSend"
-            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="10dp"
             android:text="@string/validate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnForget"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"

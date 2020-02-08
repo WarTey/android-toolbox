@@ -24,6 +24,10 @@
     <string name="webservices_button">Bouton webservices</string>
     <string name="logout_button">Bouton déconnexion</string>
 
+    <string name="my_dashboard">My Dashboard</string>
+    <string name="agenda">Agenda</string>
+    <string name="firebase">Firebase</string>
+
     <!-- LifeCycleActivity -->
     <string name="state">State</string>
     <string name="toggle_display">Alterner l\'affichage</string>
@@ -70,4 +74,5 @@
 
     <!-- WebservicesActivity -->
     <string name="error_users_webservices">Erreur lors de la récupération d\'utilisateurs</string>
+    <string name="disconnection">Déconnexion</string>
 </resources>

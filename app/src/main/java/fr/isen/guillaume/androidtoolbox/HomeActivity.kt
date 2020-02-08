@@ -2,10 +2,9 @@ package fr.isen.guillaume.androidtoolbox
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
+import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -14,17 +13,24 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        welcomeMessage()
+        welcomeProcess()
 
-        imgLifeCycle.setOnClickListener { startActivity(Intent(this, LifeCycleActivity::class.java)) }
-        imgLogout.setOnClickListener { logout() }
-        imgBackup.setOnClickListener { startActivity(Intent(this, BackupActivity::class.java)) }
-        imgPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
-        imgWebservices.setOnClickListener { startActivity(Intent(this, WebservicesActivity::class.java)) }
+        materialCardLifeCycle.setOnClickListener { startActivity(Intent(this, LifeCycleActivity::class.java)) }
+        materialCardBackup.setOnClickListener { startActivity(Intent(this, BackupActivity::class.java)) }
+        materialCardPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
+        materialCardWebservices.setOnClickListener { startActivity(Intent(this, WebservicesActivity::class.java)) }
+        btnLogout.setOnClickListener { logout() }
     }
 
-    private fun welcomeMessage() {
-        Snackbar.make(layoutHome, getString(R.string.welcome_name, intent.getStringExtra("username")), Snackbar.LENGTH_LONG).setBackgroundTint(ContextCompat.getColor(this, R.color.colorPrimaryDark)).show()
+    private fun welcomeProcess() {
+        txtUsername.text = intent.getStringExtra("username")
+        materialCardLifeCycle.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
+        materialCardBackup.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
+        materialCardPermissions.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))
+        materialCardWebservices.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))
+        materialCardAgenda.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_three))
+        materialCardFirebase.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_three))
+        btnLogout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_four))
     }
 
     private fun logout() {
