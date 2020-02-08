@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -37,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     private fun login(sharedPreferences: SharedPreferences) {
         if (inputCheck()) {
             setSharedPreferences(sharedPreferences)
-            Toast.makeText(this, getString(R.string.welcome_name, txtUsername.text.toString()), Toast.LENGTH_LONG).show()
+            Snackbar.make(layoutLogin, getString(R.string.welcome_name, txtUsername.text.toString()), Snackbar.LENGTH_LONG).setBackgroundTint(ContextCompat.getColor(this, R.color.colorPrimaryDark)).show()
             goToHome()
         } else
             viewBadInput()
