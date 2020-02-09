@@ -15,22 +15,17 @@
     <!-- HomeActivity -->
     <string name="welcome">Bonjour</string>
     <string name="life_cycle">Cycle de vie</string>
-    <string name="life_cycle_button">Bouton cycle de vie</string>
     <string name="backup">Sauvegarde</string>
-    <string name="backup_button">Bouton sauvegarde</string>
     <string name="permissions">Permissions</string>
-    <string name="permissions_button">Bouton permissions</string>
     <string name="webservices">Webservices</string>
-    <string name="webservices_button">Bouton webservices</string>
-    <string name="logout_button">Bouton déconnexion</string>
-
+    <string name="disconnection">Déconnexion</string>
     <string name="my_dashboard">My Dashboard</string>
     <string name="agenda">Agenda</string>
     <string name="firebase">Firebase</string>
 
     <!-- LifeCycleActivity -->
     <string name="state">State</string>
-    <string name="toggle_display">Alterner l\'affichage</string>
+    <string name="toggle_display">Alterner les fragments</string>
     <string name="activity_foreground">Activity Foreground</string>
     <string name="activity_background">Activity Background</string>
     <string name="activity_destroyed">Activity Destroyed</string>
@@ -40,6 +35,11 @@
     <string name="fragment_two_foreground">Fragment Two Foreground</string>
     <string name="fragment_two_background">Fragment Two Background</string>
     <string name="fragment_two_destroyed">Fragment Two Destroyed</string>
+    <string name="arrow_down">Flèche Bas</string>
+    <string name="next_hint">Next Hint</string>
+    <string name="which_activity_stats">Quel est l\'état de cette activité ?</string>
+    <string name="which_fragment_state">Et pour les fragments ?</string>
+    <string name="click_button">Appuyez sur ce bouton</string>
 
     <!-- BackupActivity -->
     <string name="name">Nom</string>
@@ -74,5 +74,4 @@
 
     <!-- WebservicesActivity -->
     <string name="error_users_webservices">Erreur lors de la récupération d\'utilisateurs</string>
-    <string name="disconnection">Déconnexion</string>
 </resources>

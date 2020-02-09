@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_fragment_one"
     tools:context=".lifecycle.LifeCycleOneFragment">
 
     <TextView
@@ -11,9 +12,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/state"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_navigate_next_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtLifeCycle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtLifeCycle"
+        android:contentDescription="@string/next_hint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
