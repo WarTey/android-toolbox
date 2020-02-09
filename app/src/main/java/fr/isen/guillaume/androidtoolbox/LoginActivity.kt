@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         initLayout()
 
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        if (sharedPreferences.getString("username", "").equals(USERNAME) && sharedPreferences.getString("password", "").equals(PASSWORD))
+        if (sharedPreferences.getString(getString(R.string.key_username), "").equals(USERNAME) && sharedPreferences.getString(getString(R.string.key_password), "").equals(PASSWORD))
             goToHome()
 
         btnSend.setOnClickListener { login(sharedPreferences) }
@@ -43,8 +43,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setSharedPreferences(sharedPreferences: SharedPreferences) {
         val editor = sharedPreferences.edit()
-        editor.putString("username", txtUsername.text.toString())
-        editor.putString("password", txtPassword.text.toString())
+        editor.putString(getString(R.string.key_username), txtUsername.text.toString())
+        editor.putString(getString(R.string.key_password), txtPassword.text.toString())
         editor.apply()
     }
 
@@ -54,19 +54,19 @@ class LoginActivity : AppCompatActivity() {
 
     private fun viewBadInput() {
         if (txtUsername.text.toString() != USERNAME)
-            inputUsername.error = "Identifiant incorrect"
+            inputUsername.error = getString(R.string.incorrect_username)
         else
             inputUsername.error = null
 
         if (txtPassword.text.toString() != PASSWORD)
-            inputPassword.error = "Mot de passe incorrect"
+            inputPassword.error = getString(R.string.incorrect_password)
         else
             inputPassword.error = null
     }
 
     private fun goToHome() {
         val intentHome = Intent(this, HomeActivity::class.java)
-        intentHome.putExtra("username", USERNAME)
+        intentHome.putExtra(getString(R.string.key_username), USERNAME)
         intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intentHome)
         finish()

@@ -23,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun welcomeProcess() {
-        txtUsername.text = intent.getStringExtra("username")
+        txtUsername.text = intent.getStringExtra(getString(R.string.key_username))
         materialCardLifeCycle.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
         materialCardBackup.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
         materialCardPermissions.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))

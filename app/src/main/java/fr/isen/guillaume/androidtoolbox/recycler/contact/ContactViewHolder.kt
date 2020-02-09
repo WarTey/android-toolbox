@@ -14,7 +14,7 @@ class ContactViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         itemView.nameContact.text = context.getString(R.string.name_hint, returnForEmptyField(context, contact.name, contact.name.isEmpty()))
         itemView.numberContact.text = context.getString(R.string.number_hint, returnForEmptyField(context, contact.number, contact.number.isNullOrEmpty()))
         itemView.emailContact.text = context.getString(R.string.email_hint, returnForEmptyField(context, contact.email, contact.email.isNullOrEmpty()))
-        Picasso.get().load(contact.picture).error(R.mipmap.ic_launcher_round).into(itemView.imgContact)
+        Picasso.get().load(contact.picture).error(R.drawable.no_picture).into(itemView.imgContact)
     }
 
     private fun returnForEmptyField(context: Context, text: String?, boolean: Boolean): String? {

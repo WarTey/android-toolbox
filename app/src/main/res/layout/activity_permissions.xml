@@ -6,11 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".PermissionsActivity">
 
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundColor="@android:color/white"
+        app:maxParticleRadius="3"
+        app:minParticleRadius="3"
+        app:particleColor="@color/colorPrimary"
+        app:particleCount="8" />
+
     <TextView
         android:id="@+id/txtAccess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/permissions"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -38,7 +48,7 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:contentDescription="@string/select_picture"
-            android:src="@drawable/ic_add_a_photo_black_72dp"
+            android:src="@drawable/ic_photo_camera_72px"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

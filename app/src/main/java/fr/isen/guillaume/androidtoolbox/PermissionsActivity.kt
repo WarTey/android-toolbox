@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.isen.guillaume.androidtoolbox.model.Contact
 import fr.isen.guillaume.androidtoolbox.model.Coordinate
 import fr.isen.guillaume.androidtoolbox.recycler.contact.RecyclerAdapter
@@ -36,7 +37,9 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         setContentView(R.layout.activity_permissions)
 
         initRequest()
+        firstVisit()
         imgGallery.setOnClickListener { getImageSource() }
+        txtAccess.setOnClickListener { showHelpDialog() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -77,7 +80,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
     }
 
     private fun getContacts() {
-        if (checkPermissions(CONTACTS_PERMISSIONS, getString(R.string.error_permissions))) {
+        if (isPermissionsGranted(CONTACTS_PERMISSIONS, getString(R.string.error_permissions))) {
             val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
             val contacts = ArrayList<Contact>()
             cursor?.let {
@@ -125,7 +128,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
 
     @SuppressLint("MissingPermission")
     private fun getPos() {
-        if (checkPermissions(POS_PERMISSIONS, getString(R.string.error_permissions))) {
+        if (isPermissionsGranted(POS_PERMISSIONS, getString(R.string.error_permissions))) {
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             locationManager?.let {
                 val services = arrayOf(it.isProviderEnabled(LocationManager.GPS_PROVIDER), it.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
@@ -161,7 +164,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
     }
 
     private fun initRequest() {
-        if (!checkPermissions(PERMISSIONS, null))
+        if (!isPermissionsGranted(PERMISSIONS, null))
             ActivityCompat.requestPermissions(this, PERMISSIONS, REQUESTS)
         else {
             getPos()
@@ -169,7 +172,21 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    private fun checkPermissions(permissions: Array<String>, message: String?): Boolean {
+    private fun firstVisit() {
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        if (!sharedPreferences.getString(getString(R.string.key_permissions), "").equals(VISITED)) {
+            val editor = sharedPreferences.edit()
+            editor.putString(getString(R.string.key_permissions), VISITED)
+            editor.apply()
+            showHelpDialog()
+        }
+    }
+
+    private fun showHelpDialog() {
+        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.first_visit)).setMessage(getString(R.string.visit_text)).setPositiveButton(getString(R.string.ok_btn), null).show()
+    }
+
+    private fun isPermissionsGranted(permissions: Array<String>, message: String?): Boolean {
         permissions.forEach {
             if (ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED) {
                 if (!message.isNullOrEmpty())
@@ -179,6 +196,14 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         }
         return true
     }
+
+    override fun onLocationChanged(location: Location?) { comparePos(location) }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) { }
+
+    override fun onProviderEnabled(provider: String?) { }
+
+    override fun onProviderDisabled(provider: String?) { }
 
     override fun onStop() {
         super.onStop()
@@ -192,13 +217,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         private const val REQUESTS = 1000
         private const val CHOOSER = 1
         private const val CAPTURE_DATA = "data"
+        private const val PREFS_NAME = "VisitToolBox"
+        private const val VISITED = "Visited"
     }
-
-    override fun onLocationChanged(location: Location?) { comparePos(location) }
-
-    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) { }
-
-    override fun onProviderEnabled(provider: String?) { }
-
-    override fun onProviderDisabled(provider: String?) { }
 }
