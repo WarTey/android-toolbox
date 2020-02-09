@@ -44,7 +44,7 @@ class LifeCycleOneFragment : Fragment() {
         notification(State.DESTROY)
     }
 
-    private fun notification(state : State) {
+    private fun notification(state: State) {
         when (state) {
             State.FOREGROUND -> txtLifeCycle.text = getString(R.string.fragment_one_foreground)
             State.BACKGROUND -> Log.d("TAG", getString(R.string.fragment_one_background))

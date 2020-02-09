@@ -4,31 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".BackupActivity">
+
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundColor="@android:color/white"
+        app:maxParticleRadius="3"
+        app:minParticleRadius="3"
+        app:particleColor="@color/colorPrimary"
+        app:particleCount="8" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/inputFirstname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtFillInput">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:drawableStart="@drawable/ic_create_24px"
+            android:drawablePadding="10dp"
+            android:ems="15"
             android:hint="@string/name"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputFirstname"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/viewBirthday"
+        app:boxBackgroundColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/inputDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputName">
@@ -37,90 +54,146 @@
             android:id="@+id/txtFirstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:drawableStart="@drawable/ic_create_24px"
+            android:drawablePadding="10dp"
+            android:ems="15"
             android:hint="@string/firstname"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/viewBirthday"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputDate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date_of_birth"
+        app:boxBackgroundColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnSave"
-        app:layout_constraintEnd_toStartOf="@+id/txtBirthday"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFirstname" />
-
-    <TextView
-        android:id="@+id/txtBirthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/birthday_input_hint"
-        android:importantForAutofill="no"
-        app:layout_constraintBottom_toTopOf="@+id/btnSeeSave"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/viewBirthday"
-        app:layout_constraintTop_toBottomOf="@+id/inputFirstname" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstname">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtBirthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_date_range_24px"
+            android:drawablePadding="10dp"
+            android:ems="15"
+            android:focusable="false"
+            android:hint="@string/date_of_birth"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
-        app:layout_constraintBottom_toTopOf="@+id/btnSecureSave"
-        app:layout_constraintEnd_toStartOf="@+id/btnSeeSave"
+        app:layout_constraintBottom_toTopOf="@+id/btnSeeSave"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewBirthday" />
+        app:layout_constraintTop_toBottomOf="@+id/inputDate" />
 
     <Button
         android:id="@+id/btnSecureSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/encrypt"
-        app:layout_constraintBottom_toTopOf="@+id/btnSeeDb"
-        app:layout_constraintEnd_toStartOf="@+id/btnSecureSeeSave"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnSeeSave"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+        app:layout_constraintTop_toBottomOf="@+id/inputDate" />
 
     <Button
         android:id="@+id/btnSeeSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/view_data"
-        app:layout_constraintBottom_toTopOf="@+id/btnSecureSeeSave"
+        app:layout_constraintBottom_toTopOf="@+id/txtSaveType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnSave"
-        app:layout_constraintTop_toBottomOf="@+id/txtBirthday" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
     <Button
         android:id="@+id/btnSecureSeeSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/decrypt"
-        app:layout_constraintBottom_toTopOf="@+id/btnSeeDb"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/txtSaveType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnSecureSave"
-        app:layout_constraintTop_toBottomOf="@+id/btnSeeSave" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
     <Button
         android:id="@+id/btnSaveDb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_in_database"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSeeDb"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnSeeSave"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSecureSave" />
+        app:layout_constraintTop_toBottomOf="@+id/inputDate" />
 
     <Button
         android:id="@+id/btnSeeDb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/read_in_database"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/txtSaveType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+
+    <TextView
+        android:id="@+id/txtBackupTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backup"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtFillInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtFillInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fill_all_inputs"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:ems="15"
+        app:layout_constraintBottom_toTopOf="@+id/inputName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBackupTitle" />
+
+    <TextView
+        android:id="@+id/txtSaveType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_save_type"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:ems="15"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationBackup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSeeSave" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationBackup"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnSaveDb"
-        app:layout_constraintTop_toBottomOf="@+id/btnSecureSeeSave" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_bar_backup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

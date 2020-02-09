@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemClassic"
+        android:icon="@drawable/ic_description_24px"
+        app:showAsAction="ifRoom"
+        android:title="@string/normal" />
+
+    <item
+        android:id="@+id/itemCrypt"
+        android:icon="@drawable/ic_lock_24px"
+        app:showAsAction="ifRoom"
+        android:title="@string/crypted" />
+
+    <item
+        android:id="@+id/itemBase"
+        android:icon="@drawable/ic_all_inbox_24px"
+        app:showAsAction="ifRoom"
+        android:title="@string/database" />
+
+</menu>

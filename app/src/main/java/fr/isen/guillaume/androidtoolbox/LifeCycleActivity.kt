@@ -54,7 +54,7 @@ class LifeCycleActivity : AppCompatActivity() {
         notification(State.DESTROY)
     }
 
-    private fun notification(state : State) {
+    private fun notification(state: State) {
         when (state) {
             State.FOREGROUND -> txtLifeCycle.text = getString(R.string.activity_foreground)
             State.BACKGROUND -> Log.d("TAG", getString(R.string.activity_background))
@@ -68,12 +68,12 @@ class LifeCycleActivity : AppCompatActivity() {
         viewPagerFragment.adapter = viewPagerAdapter
     }
 
-    private fun checkCurrentPage(viewPagerAdapter: ViewPagerAdapter, fragmentTwo: LifeCycleTwoFragment): Boolean {
+    private fun isFragmentTwo(viewPagerAdapter: ViewPagerAdapter, fragmentTwo: LifeCycleTwoFragment): Boolean {
         return viewPagerFragment.currentItem == viewPagerAdapter.getItemPosition(fragmentTwo)
     }
 
     private fun switchFragment(viewPagerAdapter: ViewPagerAdapter, fragmentOne: LifeCycleOneFragment, fragmentTwo: LifeCycleTwoFragment) {
-        if (checkCurrentPage(viewPagerAdapter, fragmentTwo))
+        if (isFragmentTwo(viewPagerAdapter, fragmentTwo))
             viewPagerFragment.setCurrentItem(viewPagerAdapter.getItemPosition(fragmentOne), true)
         else
             viewPagerFragment.setCurrentItem(viewPagerAdapter.getItemPosition(fragmentTwo), true)

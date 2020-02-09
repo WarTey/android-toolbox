@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(sharedPreferences: SharedPreferences) {
-        if (inputCheck()) {
+        if (isValidCredentials()) {
             setSharedPreferences(sharedPreferences)
             goToHome()
         } else
@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    private fun inputCheck(): Boolean {
+    private fun isValidCredentials(): Boolean {
         return txtUsername.text.toString() == USERNAME && txtPassword.text.toString() == PASSWORD
     }
 

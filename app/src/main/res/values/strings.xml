@@ -45,18 +45,22 @@
     <string name="name">Nom</string>
     <string name="firstname">Prénom</string>
     <string name="date_of_birth">Date de naissance</string>
-    <string name="birthday_input_hint">.. / .. / ..</string>
     <string name="save">Sauvegarder</string>
     <string name="view_data">Voir les données</string>
     <string name="encrypt">Chiffrer</string>
     <string name="decrypt">Déchiffrer</string>
     <string name="save_in_database">Sauvegarder en BDD</string>
     <string name="read_in_database">Lire en BDD</string>
-    <string name="empty_input">Veuillez remplir tout le formulaire</string>
+    <string name="empty_input">Veuillez remplir ce champ</string>
     <string name="invalid_date">Cette date n\'est pas valide</string>
     <string name="my_infos">Mes informations</string>
     <string name="alert_saved_infos">Prénom : %1$s\nNom : %2$s\nDate de naissance : %3$s\nÂge : %4$d</string>
-    <string name="error_database_read">Erreur lors de la lecture BDD</string>
+    <string name="error_database_read">Erreur lors de la lecture</string>
+    <string name="normal">Normale</string>
+    <string name="crypted">Chiffrée</string>
+    <string name="database">Base de données</string>
+    <string name="select_save_type">Sélectionnez le type de sauvegarde que vous souhaitez</string>
+    <string name="fill_all_inputs">Remplissez les champs suivants pour sauvegarder vos données</string>
 
     <!-- PermissionsActivity -->
     <string name="select_picture">Select Picture</string>
