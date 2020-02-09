@@ -15,7 +15,11 @@ import kotlinx.android.synthetic.main.fragment_life_cycle_two.*
 
 class LifeCycleTwoFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_life_cycle_two, container, false)
     }
 
@@ -48,7 +52,14 @@ class LifeCycleTwoFragment : Fragment() {
         when (state) {
             State.FOREGROUND -> txtLifeCycle.text = getString(R.string.fragment_two_foreground)
             State.BACKGROUND -> Log.d("TAG", getString(R.string.fragment_two_background))
-            State.DESTROY -> context?.let { StyleableToast.makeText(it, getString(R.string.fragment_two_destroyed), Toast.LENGTH_LONG, R.style.StyleToast).show() }
+            State.DESTROY -> context?.let {
+                StyleableToast.makeText(
+                    it,
+                    getString(R.string.fragment_two_destroyed),
+                    Toast.LENGTH_LONG,
+                    R.style.StyleToast
+                ).show()
+            }
         }
     }
 }

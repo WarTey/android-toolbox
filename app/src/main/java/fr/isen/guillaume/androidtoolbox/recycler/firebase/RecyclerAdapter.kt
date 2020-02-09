@@ -6,11 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.guillaume.androidtoolbox.R
 
-class RecyclerAdapter(private val messages: ArrayList<String>, private val context: Context): RecyclerView.Adapter<FirebaseViewHolder>() {
+class RecyclerAdapter(private val messages: ArrayList<String>, private val context: Context) :
+    RecyclerView.Adapter<FirebaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirebaseViewHolder {
         return FirebaseViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_firebase_items, parent, false)
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.recyclerview_firebase_items,
+                parent,
+                false
+            )
         )
     }
 

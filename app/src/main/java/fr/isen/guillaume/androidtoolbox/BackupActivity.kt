@@ -51,7 +51,12 @@ class BackupActivity : AppCompatActivity() {
         return if (date <= Calendar.getInstance().timeInMillis)
             true
         else {
-            StyleableToast.makeText(this, getString(R.string.invalid_date), Toast.LENGTH_LONG, R.style.StyleToast).show()
+            StyleableToast.makeText(
+                this,
+                getString(R.string.invalid_date),
+                Toast.LENGTH_LONG,
+                R.style.StyleToast
+            ).show()
             false
         }
     }
@@ -72,25 +77,55 @@ class BackupActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.itemClassic -> {
                     hideBtn()
-                    btnSave.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
+                    btnSave.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            this,
+                            R.anim.translation_y_one
+                        )
+                    )
                     btnSave.visibility = View.VISIBLE
-                    btnSeeSave.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))
+                    btnSeeSave.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            this,
+                            R.anim.translation_y_two
+                        )
+                    )
                     btnSeeSave.visibility = View.VISIBLE
                     true
                 }
                 R.id.itemCrypt -> {
                     hideBtn()
-                    btnSecureSave.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
+                    btnSecureSave.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            this,
+                            R.anim.translation_y_one
+                        )
+                    )
                     btnSecureSave.visibility = View.VISIBLE
-                    btnSecureSeeSave.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))
+                    btnSecureSeeSave.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            this,
+                            R.anim.translation_y_two
+                        )
+                    )
                     btnSecureSeeSave.visibility = View.VISIBLE
                     true
                 }
                 R.id.itemBase -> {
                     hideBtn()
-                    btnSaveDb.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
+                    btnSaveDb.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            this,
+                            R.anim.translation_y_one
+                        )
+                    )
                     btnSaveDb.visibility = View.VISIBLE
-                    btnSeeDb.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))
+                    btnSeeDb.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            this,
+                            R.anim.translation_y_two
+                        )
+                    )
                     btnSeeDb.visibility = View.VISIBLE
                     true
                 }
@@ -113,13 +148,33 @@ class BackupActivity : AppCompatActivity() {
     }
 
     private fun writeData(isSecure: Boolean, file: String, sharedPreferences: SharedPreferences) {
-        if (!isEmptyFields(txtName.text.toString(), txtFirstname.text.toString(), txtBirthday.text.toString())) {
+        if (!isEmptyFields(
+                txtName.text.toString(),
+                txtFirstname.text.toString(),
+                txtBirthday.text.toString()
+            )
+        ) {
             if (isSecure) {
-                val fileData = Gson().toJson(Backup(txtName.text.toString(), txtFirstname.text.toString(), txtBirthday.text.toString()))
-                val encodedData = DataSecurity().encrypt(sharedPreferences, fileData.toByteArray(Charsets.UTF_8))
+                val fileData = Gson().toJson(
+                    Backup(
+                        txtName.text.toString(),
+                        txtFirstname.text.toString(),
+                        txtBirthday.text.toString()
+                    )
+                )
+                val encodedData =
+                    DataSecurity().encrypt(sharedPreferences, fileData.toByteArray(Charsets.UTF_8))
                 File(file).writeBytes(encodedData)
             } else
-                File(file).writeText(Gson().toJson(Backup(txtName.text.toString(), txtFirstname.text.toString(), txtBirthday.text.toString())))
+                File(file).writeText(
+                    Gson().toJson(
+                        Backup(
+                            txtName.text.toString(),
+                            txtFirstname.text.toString(),
+                            txtBirthday.text.toString()
+                        )
+                    )
+                )
         } else
             viewBadInput()
     }
@@ -128,17 +183,26 @@ class BackupActivity : AppCompatActivity() {
         if (File(filePath).exists()) {
             val backup: Backup
             backup = if (isSecure) {
-                val data = DataSecurity().decrypt(sharedPreferences, DataSecurity().readFile(filePath))
+                val data =
+                    DataSecurity().decrypt(sharedPreferences, DataSecurity().readFile(filePath))
                 Gson().fromJson(data, Backup::class.java)
             } else
-                Gson().fromJson(File(filePath).bufferedReader().use { it.readText() }, Backup::class.java)
+                Gson().fromJson(
+                    File(filePath).bufferedReader().use { it.readText() },
+                    Backup::class.java
+                )
             showPopup(backup)
         } else
             readError()
     }
 
     private fun insertBackup(backupDatabase: BackupDatabase?) {
-        if (!isEmptyFields(txtName.text.toString(), txtFirstname.text.toString(), txtBirthday.text.toString())) {
+        if (!isEmptyFields(
+                txtName.text.toString(),
+                txtFirstname.text.toString(),
+                txtBirthday.text.toString()
+            )
+        ) {
             val backup = BackupRoom()
             backup.name = txtName.text.toString()
             backup.firstname = txtFirstname.text.toString()
@@ -180,11 +244,24 @@ class BackupActivity : AppCompatActivity() {
     }
 
     private fun showPopup(backup: Backup) {
-        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.my_infos)).setMessage(getString(R.string.alert_saved_infos, backup.firstname, backup.name, backup.birthday, backup.getAge())).setPositiveButton(getString(R.string.ok_btn), null).show()
+        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.my_infos)).setMessage(
+            getString(
+                R.string.alert_saved_infos,
+                backup.firstname,
+                backup.name,
+                backup.birthday,
+                backup.getAge()
+            )
+        ).setPositiveButton(getString(R.string.ok_btn), null).show()
     }
 
     private fun readError() {
-        StyleableToast.makeText(this, getString(R.string.error_database_read), Toast.LENGTH_LONG, R.style.StyleToast).show()
+        StyleableToast.makeText(
+            this,
+            getString(R.string.error_database_read),
+            Toast.LENGTH_LONG,
+            R.style.StyleToast
+        ).show()
     }
 
     override fun onDestroy() {

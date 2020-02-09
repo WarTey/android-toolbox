@@ -10,7 +10,8 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bindUser(user: User) {
         val name = user.name.first + " " + user.name.last
-        val address = user.location.street.number + " " + user.location.state + " " + user.location.street.name + " " + user.location.city
+        val address =
+            user.location.street.number + " " + user.location.state + " " + user.location.street.name + " " + user.location.city
         itemView.txtName.text = name
         itemView.txtMail.text = user.email
         itemView.txtAddress.text = address

@@ -18,23 +18,88 @@ class HomeActivity : AppCompatActivity() {
 
         welcomeProcess()
 
-        materialCardLifeCycle.setOnClickListener { startActivity(Intent(this, LifeCycleActivity::class.java)) }
-        materialCardBackup.setOnClickListener { startActivity(Intent(this, BackupActivity::class.java)) }
-        materialCardPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
-        materialCardWebservices.setOnClickListener { startActivity(Intent(this, WebservicesActivity::class.java)) }
-        materialCardFirebase.setOnClickListener { startActivity(Intent(this, FirebaseLoginActivity::class.java)) }
+        materialCardLifeCycle.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    LifeCycleActivity::class.java
+                )
+            )
+        }
+        materialCardBackup.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    BackupActivity::class.java
+                )
+            )
+        }
+        materialCardPermissions.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    PermissionsActivity::class.java
+                )
+            )
+        }
+        materialCardWebservices.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    WebservicesActivity::class.java
+                )
+            )
+        }
+        materialCardFirebase.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    FirebaseLoginActivity::class.java
+                )
+            )
+        }
         materialCardAgenda.setOnClickListener { agendaMessage() }
         btnLogout.setOnClickListener { logout() }
     }
 
     private fun welcomeProcess() {
         txtUsername.text = intent.getStringExtra(getString(R.string.key_username))
-        materialCardLifeCycle.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
-        materialCardBackup.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_one))
-        materialCardPermissions.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))
-        materialCardWebservices.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_two))
-        materialCardAgenda.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_three))
-        materialCardFirebase.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_three))
+        materialCardLifeCycle.startAnimation(
+            AnimationUtils.loadAnimation(
+                this,
+                R.anim.translation_y_one
+            )
+        )
+        materialCardBackup.startAnimation(
+            AnimationUtils.loadAnimation(
+                this,
+                R.anim.translation_y_one
+            )
+        )
+        materialCardPermissions.startAnimation(
+            AnimationUtils.loadAnimation(
+                this,
+                R.anim.translation_y_two
+            )
+        )
+        materialCardWebservices.startAnimation(
+            AnimationUtils.loadAnimation(
+                this,
+                R.anim.translation_y_two
+            )
+        )
+        materialCardAgenda.startAnimation(
+            AnimationUtils.loadAnimation(
+                this,
+                R.anim.translation_y_three
+            )
+        )
+        materialCardFirebase.startAnimation(
+            AnimationUtils.loadAnimation(
+                this,
+                R.anim.translation_y_three
+            )
+        )
         btnLogout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translation_y_four))
     }
 
@@ -50,7 +115,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun agendaMessage() {
-        StyleableToast.makeText(this, getString(R.string.under_construction), Toast.LENGTH_LONG, R.style.StyleToast).show()
+        StyleableToast.makeText(
+            this,
+            getString(R.string.under_construction),
+            Toast.LENGTH_LONG,
+            R.style.StyleToast
+        ).show()
     }
 
     private fun goToLogin() {

@@ -8,7 +8,7 @@ import fr.isen.guillaume.androidtoolbox.database.dao.BackupDao
 import fr.isen.guillaume.androidtoolbox.model.BackupRoom
 
 @Database(entities = [BackupRoom::class], version = 1)
-abstract class BackupDatabase: RoomDatabase() {
+abstract class BackupDatabase : RoomDatabase() {
 
     abstract fun backupDao(): BackupDao
 
@@ -18,7 +18,11 @@ abstract class BackupDatabase: RoomDatabase() {
         fun getInstance(context: Context): BackupDatabase? {
             if (INSTANCE == null)
                 synchronized(BackupDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, BackupDatabase::class.java, "backup.db").build()
+                    INSTANCE = Room.databaseBuilder(
+                        context.applicationContext,
+                        BackupDatabase::class.java,
+                        "backup.db"
+                    ).build()
                 }
             return INSTANCE
         }

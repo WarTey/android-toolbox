@@ -26,7 +26,13 @@ class LifeCycleActivity : AppCompatActivity() {
 
         notification(State.FOREGROUND)
         initViewPager(viewPagerAdapter, fragmentOne, fragmentTwo)
-        btnFragment.setOnClickListener { switchFragment(viewPagerAdapter, fragmentOne, fragmentTwo) }
+        btnFragment.setOnClickListener {
+            switchFragment(
+                viewPagerAdapter,
+                fragmentOne,
+                fragmentTwo
+            )
+        }
     }
 
     override fun onStart() {
@@ -58,21 +64,37 @@ class LifeCycleActivity : AppCompatActivity() {
         when (state) {
             State.FOREGROUND -> txtLifeCycle.text = getString(R.string.activity_foreground)
             State.BACKGROUND -> Log.d("TAG", getString(R.string.activity_background))
-            State.DESTROY -> StyleableToast.makeText(this, getString(R.string.activity_destroyed), Toast.LENGTH_LONG, R.style.StyleToast).show()
+            State.DESTROY -> StyleableToast.makeText(
+                this,
+                getString(R.string.activity_destroyed),
+                Toast.LENGTH_LONG,
+                R.style.StyleToast
+            ).show()
         }
     }
 
-    private fun initViewPager(viewPagerAdapter: ViewPagerAdapter, fragmentOne: LifeCycleOneFragment, fragmentTwo: LifeCycleTwoFragment) {
+    private fun initViewPager(
+        viewPagerAdapter: ViewPagerAdapter,
+        fragmentOne: LifeCycleOneFragment,
+        fragmentTwo: LifeCycleTwoFragment
+    ) {
         viewPagerAdapter.addFragment(fragmentOne)
         viewPagerAdapter.addFragment(fragmentTwo)
         viewPagerFragment.adapter = viewPagerAdapter
     }
 
-    private fun isFragmentTwo(viewPagerAdapter: ViewPagerAdapter, fragmentTwo: LifeCycleTwoFragment): Boolean {
+    private fun isFragmentTwo(
+        viewPagerAdapter: ViewPagerAdapter,
+        fragmentTwo: LifeCycleTwoFragment
+    ): Boolean {
         return viewPagerFragment.currentItem == viewPagerAdapter.getItemPosition(fragmentTwo)
     }
 
-    private fun switchFragment(viewPagerAdapter: ViewPagerAdapter, fragmentOne: LifeCycleOneFragment, fragmentTwo: LifeCycleTwoFragment) {
+    private fun switchFragment(
+        viewPagerAdapter: ViewPagerAdapter,
+        fragmentOne: LifeCycleOneFragment,
+        fragmentTwo: LifeCycleTwoFragment
+    ) {
         if (isFragmentTwo(viewPagerAdapter, fragmentTwo))
             viewPagerFragment.setCurrentItem(viewPagerAdapter.getItemPosition(fragmentOne), true)
         else

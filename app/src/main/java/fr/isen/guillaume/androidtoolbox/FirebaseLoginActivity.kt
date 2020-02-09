@@ -25,7 +25,10 @@ class FirebaseLoginActivity : AppCompatActivity() {
 
     private fun login(auth: FirebaseAuth) {
         if (!isEmptyInput()) {
-            auth.signInWithEmailAndPassword(txtUsername.text.toString(), txtPassword.text.toString()).addOnCompleteListener(this) {
+            auth.signInWithEmailAndPassword(
+                txtUsername.text.toString(),
+                txtPassword.text.toString()
+            ).addOnCompleteListener(this) {
                 if (it.isSuccessful) {
                     goToData()
                     viewLoginSuccess()
@@ -47,11 +50,18 @@ class FirebaseLoginActivity : AppCompatActivity() {
 
     private fun viewLoginError() {
         resetInputError()
-        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.connection_error)).setMessage(getString(R.string.connection_error_message)).setPositiveButton(getString(R.string.ok_btn), null).show()
+        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.connection_error))
+            .setMessage(getString(R.string.connection_error_message))
+            .setPositiveButton(getString(R.string.ok_btn), null).show()
     }
 
     private fun viewLoginSuccess() {
-        StyleableToast.makeText(this, getString(R.string.login_success), Toast.LENGTH_LONG, R.style.StyleToastSuccess).show()
+        StyleableToast.makeText(
+            this,
+            getString(R.string.login_success),
+            Toast.LENGTH_LONG,
+            R.style.StyleToastSuccess
+        ).show()
     }
 
     private fun viewBadInput() {

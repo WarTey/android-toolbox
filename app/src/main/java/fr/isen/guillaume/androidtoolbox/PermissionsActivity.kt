@@ -57,7 +57,11 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             REQUESTS -> {
@@ -82,33 +86,58 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
 
     private fun getContacts() {
         if (isPermissionsGranted(CONTACTS_PERMISSIONS, getString(R.string.error_permissions))) {
-            val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
+            val cursor =
+                contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
             val contacts = ArrayList<Contact>()
             cursor?.let {
                 if (cursor.count > 0) {
                     while (cursor.moveToNext()) {
-                        val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
-                        val name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                        val id =
+                            cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                        val name =
+                            cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
                         val phoneNumber = getContactPhone(id)
                         val email = getContactEmail(id)
 
-                        val contentImg = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id.toLong())
-                        val img = Uri.withAppendedPath(contentImg, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY)
+                        val contentImg = ContentUris.withAppendedId(
+                            ContactsContract.Contacts.CONTENT_URI,
+                            id.toLong()
+                        )
+                        val img = Uri.withAppendedPath(
+                            contentImg,
+                            ContactsContract.Contacts.Photo.CONTENT_DIRECTORY
+                        )
 
                         contacts.add(Contact(name, phoneNumber, email, img))
                     }
                     recyclerPermissions.layoutManager = LinearLayoutManager(this)
-                    recyclerPermissions.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+                    recyclerPermissions.addItemDecoration(
+                        DividerItemDecoration(
+                            this,
+                            DividerItemDecoration.VERTICAL
+                        )
+                    )
                     recyclerPermissions.adapter = RecyclerAdapter(contacts, applicationContext)
                 } else
-                    StyleableToast.makeText(this, getString(R.string.no_contacts), Toast.LENGTH_LONG, R.style.StyleToast).show()
+                    StyleableToast.makeText(
+                        this,
+                        getString(R.string.no_contacts),
+                        Toast.LENGTH_LONG,
+                        R.style.StyleToast
+                    ).show()
                 cursor.close()
             }
         }
     }
 
     private fun getContactPhone(id: String): String? {
-        val cursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id, null, null)
+        val cursor = contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null,
+            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id,
+            null,
+            null
+        )
         cursor?.let {
             while (cursor.moveToNext())
                 return cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
@@ -118,7 +147,13 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
     }
 
     private fun getContactEmail(id: String): String? {
-        val cursor = contentResolver.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, ContactsContract.CommonDataKinds.Email.CONTACT_ID + "=" + id, null, null)
+        val cursor = contentResolver.query(
+            ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+            null,
+            ContactsContract.CommonDataKinds.Email.CONTACT_ID + "=" + id,
+            null,
+            null
+        )
         cursor?.let {
             while (cursor.moveToNext())
                 return cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
@@ -132,11 +167,20 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         if (isPermissionsGranted(POS_PERMISSIONS, getString(R.string.error_permissions))) {
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             locationManager?.let {
-                val services = arrayOf(it.isProviderEnabled(LocationManager.GPS_PROVIDER), it.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
-                val providers = arrayOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
+                val services = arrayOf(
+                    it.isProviderEnabled(LocationManager.GPS_PROVIDER),
+                    it.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+                )
+                val providers =
+                    arrayOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
 
                 if (!services[0] && !services[1])
-                    StyleableToast.makeText(this, getString(R.string.location_not_activated), Toast.LENGTH_LONG, R.style.StyleToast).show()
+                    StyleableToast.makeText(
+                        this,
+                        getString(R.string.location_not_activated),
+                        Toast.LENGTH_LONG,
+                        R.style.StyleToast
+                    ).show()
                 else {
                     for ((index, service) in services.withIndex()) {
                         if (service) {
@@ -184,27 +228,36 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
     }
 
     private fun showHelpDialog() {
-        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.first_visit)).setMessage(getString(R.string.visit_text_permissions)).setPositiveButton(getString(R.string.ok_btn), null).show()
+        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.first_visit))
+            .setMessage(getString(R.string.visit_text_permissions))
+            .setPositiveButton(getString(R.string.ok_btn), null).show()
     }
 
     private fun isPermissionsGranted(permissions: Array<String>, message: String?): Boolean {
         permissions.forEach {
             if (ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED) {
                 if (!message.isNullOrEmpty())
-                    StyleableToast.makeText(this, message, Toast.LENGTH_LONG, R.style.StyleToast).show()
+                    StyleableToast.makeText(
+                        this,
+                        message,
+                        Toast.LENGTH_LONG,
+                        R.style.StyleToast
+                    ).show()
                 return false
             }
         }
         return true
     }
 
-    override fun onLocationChanged(location: Location?) { comparePos(location) }
+    override fun onLocationChanged(location: Location?) {
+        comparePos(location)
+    }
 
-    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) { }
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
 
-    override fun onProviderEnabled(provider: String?) { }
+    override fun onProviderEnabled(provider: String?) {}
 
-    override fun onProviderDisabled(provider: String?) { }
+    override fun onProviderDisabled(provider: String?) {}
 
     override fun onStop() {
         super.onStop()
@@ -213,8 +266,15 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
 
     companion object {
         private val CONTACTS_PERMISSIONS = arrayOf(Manifest.permission.READ_CONTACTS)
-        private val POS_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-        private val PERMISSIONS = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+        private val POS_PERMISSIONS = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        private val PERMISSIONS = arrayOf(
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
         private const val REQUESTS = 1000
         private const val CHOOSER = 1
         private const val CAPTURE_DATA = "data"

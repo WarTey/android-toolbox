@@ -19,7 +19,14 @@ class LoginActivity : AppCompatActivity() {
         initLayout()
 
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        if (sharedPreferences.getString(getString(R.string.key_username), "").equals(USERNAME) && sharedPreferences.getString(getString(R.string.key_password), "").equals(PASSWORD))
+        if (sharedPreferences.getString(
+                getString(R.string.key_username),
+                ""
+            ).equals(USERNAME) && sharedPreferences.getString(
+                getString(R.string.key_password),
+                ""
+            ).equals(PASSWORD)
+        )
             goToHome()
 
         btnSend.setOnClickListener { login(sharedPreferences) }
@@ -73,7 +80,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun viewLoginInfos() {
-        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.password_forget)).setMessage(getString(R.string.password_retrieve, USERNAME, PASSWORD)).setPositiveButton(getString(R.string.ok_btn), null).show()
+        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.password_forget))
+            .setMessage(getString(R.string.password_retrieve, USERNAME, PASSWORD))
+            .setPositiveButton(getString(R.string.ok_btn), null).show()
     }
 
     companion object {

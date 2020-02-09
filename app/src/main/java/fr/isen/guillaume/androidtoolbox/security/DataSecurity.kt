@@ -27,7 +27,8 @@ class DataSecurity {
 
     fun getSecretKey(sharedPref: SharedPreferences): PrivateKey {
         val key = sharedPref.getString("key", null)
-        return KeyFactory.getInstance(ALGORITHM).generatePrivate(PKCS8EncodedKeySpec(Base64.decode(key, Base64.NO_WRAP)))
+        return KeyFactory.getInstance(ALGORITHM)
+            .generatePrivate(PKCS8EncodedKeySpec(Base64.decode(key, Base64.NO_WRAP)))
     }
 
     fun encrypt(sharedPref: SharedPreferences, fileData: ByteArray): ByteArray {

@@ -24,7 +24,7 @@ class FirebaseDataActivity : AppCompatActivity() {
 
     private fun messageListener(messageReference: DatabaseReference, messages: ArrayList<String>) {
         messageReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
+            override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists())
@@ -33,7 +33,7 @@ class FirebaseDataActivity : AppCompatActivity() {
         })
 
         messageReference.addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
+            override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists())
@@ -42,7 +42,11 @@ class FirebaseDataActivity : AppCompatActivity() {
         })
     }
 
-    private fun getData(dataSnapshot: DataSnapshot, isRefreshed: Boolean, messages: ArrayList<String>) {
+    private fun getData(
+        dataSnapshot: DataSnapshot,
+        isRefreshed: Boolean,
+        messages: ArrayList<String>
+    ) {
         if (isRefreshed)
             while (messages.isNotEmpty())
                 messages.removeAt(messages.count() - 1)
@@ -60,12 +64,18 @@ class FirebaseDataActivity : AppCompatActivity() {
             recyclerFirebase.adapter?.notifyDataSetChanged()
         else {
             recyclerFirebase.layoutManager = LinearLayoutManager(this@FirebaseDataActivity)
-            recyclerFirebase.addItemDecoration(DividerItemDecoration(this@FirebaseDataActivity, DividerItemDecoration.VERTICAL))
+            recyclerFirebase.addItemDecoration(
+                DividerItemDecoration(
+                    this@FirebaseDataActivity,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
             recyclerFirebase.adapter = RecyclerAdapter(messages, this)
         }
     }
 
     private fun addMessage(databaseReference: DatabaseReference) {
-        databaseReference.child(FirebaseAuth.getInstance().currentUser?.uid + (0..10).random()).setValue(txtSend.text.toString())
+        databaseReference.child(FirebaseAuth.getInstance().currentUser?.uid + (0..10).random())
+            .setValue(txtSend.text.toString())
     }
 }
