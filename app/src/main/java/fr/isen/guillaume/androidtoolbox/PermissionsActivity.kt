@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.muddzdev.styleabletoast.StyleableToast
 import fr.isen.guillaume.androidtoolbox.model.Contact
 import fr.isen.guillaume.androidtoolbox.model.Coordinate
 import fr.isen.guillaume.androidtoolbox.recycler.contact.RecyclerAdapter
@@ -100,7 +101,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
                     recyclerPermissions.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
                     recyclerPermissions.adapter = RecyclerAdapter(contacts, applicationContext)
                 } else
-                    Toast.makeText(this, getString(R.string.no_contacts), Toast.LENGTH_LONG).show()
+                    StyleableToast.makeText(this, getString(R.string.no_contacts), Toast.LENGTH_LONG, R.style.StyleToast).show()
                 cursor.close()
             }
         }
@@ -135,7 +136,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
                 val providers = arrayOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
 
                 if (!services[0] && !services[1])
-                    Toast.makeText(this, getString(R.string.location_not_activated), Toast.LENGTH_LONG).show()
+                    StyleableToast.makeText(this, getString(R.string.location_not_activated), Toast.LENGTH_LONG, R.style.StyleToast).show()
                 else {
                     for ((index, service) in services.withIndex()) {
                         if (service) {
@@ -190,7 +191,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
         permissions.forEach {
             if (ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED) {
                 if (!message.isNullOrEmpty())
-                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                    StyleableToast.makeText(this, message, Toast.LENGTH_LONG, R.style.StyleToast).show()
                 return false
             }
         }
