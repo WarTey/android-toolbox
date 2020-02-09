@@ -184,7 +184,7 @@ class PermissionsActivity : AppCompatActivity(), LocationListener {
     }
 
     private fun showHelpDialog() {
-        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.first_visit)).setMessage(getString(R.string.visit_text)).setPositiveButton(getString(R.string.ok_btn), null).show()
+        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.first_visit)).setMessage(getString(R.string.visit_text_permissions)).setPositiveButton(getString(R.string.ok_btn), null).show()
     }
 
     private fun isPermissionsGranted(permissions: Array<String>, message: String?): Boolean {

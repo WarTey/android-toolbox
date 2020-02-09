@@ -1,5 +1,6 @@
 package fr.isen.guillaume.androidtoolbox
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import fr.isen.guillaume.androidtoolbox.model.user.User
@@ -26,6 +28,7 @@ class WebservicesActivity : AppCompatActivity() {
         val users: ArrayList<User> = ArrayList()
         val gson = GsonBuilder().create()
 
+        firstVisit()
         makeRequest(false, users, gson)
         setScrollListener(users, gson)
     }
@@ -55,7 +58,23 @@ class WebservicesActivity : AppCompatActivity() {
         })
     }
 
+    private fun firstVisit() {
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        if (!sharedPreferences.getString(getString(R.string.key_webservices), "").equals(VISITED)) {
+            val editor = sharedPreferences.edit()
+            editor.putString(getString(R.string.key_webservices), VISITED)
+            editor.apply()
+            showHelpDialog()
+        }
+    }
+
+    private fun showHelpDialog() {
+        MaterialAlertDialogBuilder(this).setTitle(getString(R.string.first_visit)).setMessage(getString(R.string.visit_text_webservices)).setPositiveButton(getString(R.string.ok_btn), null).show()
+    }
+
     companion object {
-        private const val URL = "https://randomuser.me/api/?inc=name,location,email,picture&results=10"
+        private const val URL = "https://randomuser.me/api/?inc=name,location,email,picture&results=10&nat=fr"
+        private const val PREFS_NAME = "VisitToolBox"
+        private const val VISITED = "Visited"
     }
 }

@@ -78,13 +78,15 @@
     <string name="logo_contact">Logo Contact</string>
     <string name="location_not_activated">La localisation n\'est pas activée sur votre téléphone</string>
     <string name="first_visit">Première visite ?</string>
-    <string name="visit_text">Cette page vous permet (une fois les permissions acceptées) de voir vos contacts, votre position GPS et de vous attribuer une photo soit via la galerie ou avec votre caméra.\n\nÀ vous de jouer!</string>
+    <string name="visit_text_permissions">Cette page vous permet (une fois les permissions acceptées) de voir vos contacts, votre position GPS et de vous attribuer une photo soit via la galerie ou avec votre caméra.\n\nÀ vous de jouer!</string>
 
     <!-- WebservicesActivity -->
     <string name="error_users_webservices">Erreur lors de la récupération d\'utilisateurs</string>
+    <string name="visit_text_webservices">Cette page vous permet de voir des personnes fictives à partir d\'une API. 10 personnes sont présentes à votre arrivée mais d\'autres s\'ajoutent quand vous descendez.\n\nÀ vous de jouer!</string>
 
     <!-- SharedPreferences -->
     <string name="key_username">username</string>
     <string name="key_password">password</string>
     <string name="key_permissions">permissions</string>
+    <string name="key_webservices">webservices</string>
 </resources>

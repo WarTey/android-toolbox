@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".WebservicesActivity">
 
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundColor="@android:color/white"
+        app:maxParticleRadius="3"
+        app:minParticleRadius="3"
+        app:particleColor="@color/colorPrimary"
+        app:particleCount="8" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerWebservices"
         android:layout_width="match_parent"
