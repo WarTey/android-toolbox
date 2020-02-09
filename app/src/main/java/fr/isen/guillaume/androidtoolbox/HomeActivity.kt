@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.muddzdev.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -21,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
         materialCardPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
         materialCardWebservices.setOnClickListener { startActivity(Intent(this, WebservicesActivity::class.java)) }
         materialCardFirebase.setOnClickListener { startActivity(Intent(this, FirebaseLoginActivity::class.java)) }
+        materialCardAgenda.setOnClickListener { agendaMessage() }
         btnLogout.setOnClickListener { logout() }
     }
 
@@ -44,6 +47,10 @@ class HomeActivity : AppCompatActivity() {
         val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null)
             auth.signOut()
+    }
+
+    private fun agendaMessage() {
+        StyleableToast.makeText(this, getString(R.string.under_construction), Toast.LENGTH_LONG, R.style.StyleToast).show()
     }
 
     private fun goToLogin() {

@@ -98,6 +98,9 @@
     <string name="message_hint">Message : %1$s</string>
     <string name="message">Message</string>
 
+    <!-- Agenda -->
+    <string name="under_construction">En construction</string>
+
     <!-- SharedPreferences -->
     <string name="key_username">username</string>
     <string name="key_password">password</string>
