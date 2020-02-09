@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class HomeActivity : AppCompatActivity() {
         materialCardBackup.setOnClickListener { startActivity(Intent(this, BackupActivity::class.java)) }
         materialCardPermissions.setOnClickListener { startActivity(Intent(this, PermissionsActivity::class.java)) }
         materialCardWebservices.setOnClickListener { startActivity(Intent(this, WebservicesActivity::class.java)) }
+        materialCardFirebase.setOnClickListener { startActivity(Intent(this, FirebaseLoginActivity::class.java)) }
         btnLogout.setOnClickListener { logout() }
     }
 
@@ -38,6 +40,10 @@ class HomeActivity : AppCompatActivity() {
         editor.clear()
         editor.apply()
         goToLogin()
+
+        val auth = FirebaseAuth.getInstance()
+        if (auth.currentUser != null)
+            auth.signOut()
     }
 
     private fun goToLogin() {

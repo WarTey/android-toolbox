@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".FirebaseRegisterActivity"></activity>
+        <activity android:name=".FirebaseDataActivity" />
+        <activity android:name=".FirebaseLoginActivity" />
         <activity
             android:name=".WebservicesActivity"
             android:screenOrientation="portrait" />
