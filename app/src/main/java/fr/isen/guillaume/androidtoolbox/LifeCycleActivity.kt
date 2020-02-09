@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.muddzdev.styleabletoast.StyleableToast
 import fr.isen.guillaume.androidtoolbox.lifecycle.LifeCycleOneFragment
 import fr.isen.guillaume.androidtoolbox.lifecycle.LifeCycleTwoFragment
 import fr.isen.guillaume.androidtoolbox.tools.ViewPagerAdapter
@@ -25,7 +26,7 @@ class LifeCycleActivity : AppCompatActivity() {
 
         notification(State.FOREGROUND)
         initViewPager(viewPagerAdapter, fragmentOne, fragmentTwo)
-        btnFragment.setOnClickListener { alternFragment(viewPagerAdapter, fragmentOne, fragmentTwo) }
+        btnFragment.setOnClickListener { switchFragment(viewPagerAdapter, fragmentOne, fragmentTwo) }
     }
 
     override fun onStart() {
@@ -57,7 +58,7 @@ class LifeCycleActivity : AppCompatActivity() {
         when (state) {
             State.FOREGROUND -> txtLifeCycle.text = getString(R.string.activity_foreground)
             State.BACKGROUND -> Log.d("TAG", getString(R.string.activity_background))
-            State.DESTROY -> Toast.makeText(this, getString(R.string.activity_destroyed), Toast.LENGTH_LONG).show()
+            State.DESTROY -> StyleableToast.makeText(this, getString(R.string.activity_destroyed), Toast.LENGTH_LONG, R.style.StyleToast).show()
         }
     }
 
@@ -71,7 +72,7 @@ class LifeCycleActivity : AppCompatActivity() {
         return viewPagerFragment.currentItem == viewPagerAdapter.getItemPosition(fragmentTwo)
     }
 
-    private fun alternFragment(viewPagerAdapter: ViewPagerAdapter, fragmentOne: LifeCycleOneFragment, fragmentTwo: LifeCycleTwoFragment) {
+    private fun switchFragment(viewPagerAdapter: ViewPagerAdapter, fragmentOne: LifeCycleOneFragment, fragmentTwo: LifeCycleTwoFragment) {
         if (checkCurrentPage(viewPagerAdapter, fragmentTwo))
             viewPagerFragment.setCurrentItem(viewPagerAdapter.getItemPosition(fragmentOne), true)
         else

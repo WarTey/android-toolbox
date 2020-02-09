@@ -1,6 +1,5 @@
 package fr.isen.guillaume.androidtoolbox.lifecycle
 
-
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.muddzdev.styleabletoast.StyleableToast
 
 import fr.isen.guillaume.androidtoolbox.R
 import fr.isen.guillaume.androidtoolbox.State
@@ -48,7 +48,7 @@ class LifeCycleTwoFragment : Fragment() {
         when (state) {
             State.FOREGROUND -> txtLifeCycle.text = getString(R.string.fragment_two_foreground)
             State.BACKGROUND -> Log.d("TAG", getString(R.string.fragment_two_background))
-            State.DESTROY -> Toast.makeText(context, getString(R.string.fragment_two_destroyed), Toast.LENGTH_LONG).show()
+            State.DESTROY -> context?.let { StyleableToast.makeText(it, getString(R.string.fragment_two_destroyed), Toast.LENGTH_LONG, R.style.StyleToast).show() }
         }
     }
 }
