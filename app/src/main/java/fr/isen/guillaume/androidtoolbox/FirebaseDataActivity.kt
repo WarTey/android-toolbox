@@ -19,7 +19,7 @@ class FirebaseDataActivity : AppCompatActivity() {
         val databaseReference = FirebaseDatabase.getInstance().getReference("message")
 
         messageListener(databaseReference, messages)
-        imgSend.setOnClickListener { addMessage(databaseReference) }
+        imgSend.setOnClickListener { addMessage(databaseReference, messages.count()) }
     }
 
     private fun messageListener(messageReference: DatabaseReference, messages: ArrayList<String>) {
@@ -74,8 +74,8 @@ class FirebaseDataActivity : AppCompatActivity() {
         }
     }
 
-    private fun addMessage(databaseReference: DatabaseReference) {
-        databaseReference.child(FirebaseAuth.getInstance().currentUser?.uid + (0..10).random())
+    private fun addMessage(databaseReference: DatabaseReference, count: Int) {
+        databaseReference.child((count + 1).toString())
             .setValue(txtSend.text.toString())
     }
 }
